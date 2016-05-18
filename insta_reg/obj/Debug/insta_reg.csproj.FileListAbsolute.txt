@@ -7,3 +7,12 @@ C:\Users\Антон\Documents\Proj\insta_reg\insta_reg\obj\Debug\insta_reg.Prope
 C:\Users\Антон\Documents\Proj\insta_reg\insta_reg\obj\Debug\insta_reg.csproj.GenerateResource.Cache
 C:\Users\Антон\Documents\Proj\insta_reg\insta_reg\obj\Debug\insta_reg.exe
 C:\Users\Антон\Documents\Proj\insta_reg\insta_reg\obj\Debug\insta_reg.pdb
+C:\Users\Екатерина\Documents\Git\insta_reg\insta_reg\bin\Debug\insta_reg.exe.config
+C:\Users\Екатерина\Documents\Git\insta_reg\insta_reg\obj\Debug\insta_reg.exe
+C:\Users\Екатерина\Documents\Git\insta_reg\insta_reg\obj\Debug\insta_reg.pdb
+C:\Users\Екатерина\Documents\Git\insta_reg\insta_reg\bin\Debug\insta_reg.exe
+C:\Users\Екатерина\Documents\Git\insta_reg\insta_reg\bin\Debug\insta_reg.pdb
+C:\Users\Екатерина\Documents\Git\insta_reg\insta_reg\obj\Debug\insta_reg.csprojResolveAssemblyReference.cache
+C:\Users\Екатерина\Documents\Git\insta_reg\insta_reg\obj\Debug\insta_reg.Form1.resources
+C:\Users\Екатерина\Documents\Git\insta_reg\insta_reg\obj\Debug\insta_reg.Properties.Resources.resources
+C:\Users\Екатерина\Documents\Git\insta_reg\insta_reg\obj\Debug\insta_reg.csproj.GenerateResource.Cache

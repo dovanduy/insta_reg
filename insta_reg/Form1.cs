@@ -27,58 +27,60 @@ namespace insta_reg
             ToLog(Convert.ToString(CountMail));
             */
 
-            //1 этап
-            string url1 = "https://touch.mail.ru/cgi-bin/signup";
-            HttpWebRequest request1 = (HttpWebRequest)WebRequest.Create(url1);
-            HttpWebResponse response1 = (HttpWebResponse)request1.GetResponse();
-            StreamReader reader1 = new StreamReader(response1.GetResponseStream());
-            //tB_Log.Text = reader1.ReadToEnd();
-            string cookies = String.IsNullOrEmpty(response1.Headers["Set-Cookie"]) ? "" : response1.Headers["Set-Cookie"];
-            tB_Log.Text = cookies;
-
-            //2 этап
-            //string url = "https://touch.mail.ru/api/v1/user/exists";
+            //1  - заходим на сайт
             string url = "https://touch.mail.ru/cgi-bin/signup";
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            request.Host = "touch.mail.ru";
-            request.KeepAlive=false;
-            request.Accept = "*/*";
-            //request.Headers.Add(HttpRequestHeader.ori);
-            //origin
-            request.Headers.Add("X-Requested-With", "XMLHttpRequest");
-            request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36";
-            request.ContentType = "application/x-www-form-urlencoded; charset=UTF-8";
-            request.Referer = "https://touch.mail.ru/cgi-bin/signup";
+            request.Method = "GET";
+            request.Accept = "text/html, application/xhtml+xml, image/jxr, */*";
+            request.Headers.Add(HttpRequestHeader.AcceptLanguage, "ru-RU");
+            request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2486.0 Safari/537.36 Edge/13.10586";
             request.Headers.Add(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
-            request.Headers.Add(HttpRequestHeader.AcceptLanguage, "ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4");
-            request.Headers.Add(HttpRequestHeader.Cookie, cookies);
-            request.ServicePoint.Expect100Continue = false;
-            //post-данные
-            request.Method = "POST";
-            var postData = "login=fjdsdkfjd";
-            postData += "&email=fjdsdkfjd@mail.ru";
-            postData += "&domain=mail.ru";
-            postData += "&sex=male";
-            postData += "&birthday={\"year\":\"1994\",\"month\":\"10\",\"day\":\"20\"}";
-            postData += "&name={\"first\":\"Антон\",\"last\":\"Попов\"}";
-            HttpUtility.
-            HttpUtility.UrlEncode(postData);
-            var data = Encoding.UTF8.GetBytes(postData);
-            request.ContentLength = data.Length;
-
-            using (var stream = request.GetRequestStream())
-            {
-                stream.Write(data, 0, data.Length);
-            }
-            //UTF8Encoding encoding = new UTF8Encoding();
-
-
+            request.Host = "touch.mail.ru";
+            request.KeepAlive = true;
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
             StreamReader reader = new StreamReader(response.GetResponseStream());
-            //tB_Log.Text = reader.ReadToEnd();
-            //MessageBox.Show(reader.ReadToEnd());
-            ToLog("ok");
+            //tB_Log.Text = reader1.ReadToEnd();
+            string cookies = String.IsNullOrEmpty(response.Headers["Set-Cookie"]) ? "" : response.Headers["Set-Cookie"];
+            tB_Log.Text = cookies;
 
+            //2- отправляю данные
+            
+            url = "https://touch.mail.ru/cgi-bin/signup";
+            request = (HttpWebRequest)WebRequest.Create(url);
+            request.Method = "POST";
+            request.ContentType = "application/x-www-form-urlencoded; charset=UTF-8";
+            request.Accept = "*/*";
+            request.Headers.Add("X-Requested-With", "XMLHttpRequest");
+            request.Referer = "https://touch.mail.ru/cgi-bin/signup";
+            request.Headers.Add(HttpRequestHeader.AcceptLanguage, "ru-RU");
+            request.Headers.Add(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
+            request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2486.0 Safari/537.36 Edge/13.10586";
+            request.Host = "touch.mail.ru";
+            request.KeepAlive = true;
+            request.Headers.Add("Cache-Control", "no-cache");
+            request.ServicePoint.Expect100Continue = false;
+            //request.CookieContainer = new CookieContainer(); //инициализируем контейнер
+            //request.CookieContainer.Add(ckCol); //добавляем наши куки
+
+            string parameters = "name=ant";
+            //string parameters = "name={\"first\":\"Антон\",\"last\":\"Попов\"}";
+            /*
+            
+            string postParameters = HttpUtility.UrlPathEncode(parameters);
+            ToLog(postParameters);
+            request.ContentLength = postParameters.Length;
+            using (var writer = new StreamWriter(request.GetRequestStream(), Encoding.UTF8))
+            {
+                writer.Write(postParameters);
+            }*/
+
+
+            byte[] postData = Encoding.UTF8.GetBytes(HttpUtility.UrlEncode(parameters));
+            request.ContentLength = postData.Length;
+            using (var stream = request.GetRequestStream())
+            {
+                stream.Write(postData, 0, postData.Length);
+            }
         }
 
         // Вывод сообщения в лог
@@ -89,11 +91,16 @@ namespace insta_reg
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string url = "https://touch.mail.ru/cgi-bin/signup";
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-            StreamReader reader = new StreamReader(response.GetResponseStream());
-            tB_Log.Text = reader.ReadToEnd();
+            string parameters = "{\"first\":\"Антон\",\"last\":\"Попов\"}";
+            byte[] postData = Encoding.UTF8.GetBytes(HttpUtility.UrlEncode(parameters));
+            ToLog(Convert.ToString(postData));
+            /*
+            request.ContentLength = postData.Length;
+            using (var stream = request.GetRequestStream())
+            {
+                stream.Write(postData, 0, postData.Length);
+            }
+            */
 
         }
     }
