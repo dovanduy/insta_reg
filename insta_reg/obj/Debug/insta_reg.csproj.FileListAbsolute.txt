@@ -38,3 +38,5 @@ C:\Users\Антон\Desktop\флешка\Git\insta_reg1\insta_reg\obj\Debug\inst
 C:\Users\Антон\Desktop\флешка\Git\insta_reg1\insta_reg\obj\Debug\insta_reg.Form1.resources
 C:\Users\Антон\Desktop\флешка\Git\insta_reg1\insta_reg\obj\Debug\insta_reg.Properties.Resources.resources
 C:\Users\Антон\Desktop\флешка\Git\insta_reg1\insta_reg\obj\Debug\insta_reg.csproj.GenerateResource.Cache
+C:\Users\Екатерина\Documents\Git\insta_reg\insta_reg\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Екатерина\Documents\Git\insta_reg\insta_reg\bin\Debug\Newtonsoft.Json.xml
