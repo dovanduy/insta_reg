@@ -99,11 +99,19 @@ namespace insta_reg
                 //js2 = JsonConvert.DeserializeObject<Json2>(post);
                 //ToLog("Ответ: " + js2.body);
                 //
-                JObject js3 = JObject.Parse(post);
 
-                //dynamic blogPost = blogPosts[0];
-                string error = (string)js3["body"]["reg_anketa.capcha"]["value"];
-                ToLog(error);
+                dynamic parsed = JObject.Parse(post);
+                dynamic body = parsed["body"];
+
+                if (body.GetType().Name == "JObject")
+                {
+                    string error = body["reg_anketa.capcha"]["value"];
+                    ToLog("Капча "+error);
+                }
+                else
+                {
+                    ToLog("Все ОК");
+                }
             }
 
         }
@@ -164,30 +172,19 @@ namespace insta_reg
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string json = "{\"body\":{ \"reg_anketa.capcha\":{ \"value\":\"dgfdfgd\",\"error\":\"invalid\"} },\"email\":\"anton.popov@mail.ru\",\"status\":400,\"htmlencoded\":false}";
-            //string json = "{\"body\":\"good\",\"email\":\"anton.popov@mail.ru\",\"status\":400,\"htmlencoded\":false}";
+            string json1 = @"{'body':{ 'reg_anketa.capcha':{ 'value': 'dgfdfgd', 'error': 'invalid'} },'email':'anton.popov@mail.ru','status':400,'htmlencoded':false}";
+            string json2 = @"{'body':'good','email':'anton.popov@mail.ru','status':400,'htmlencoded':false}";
 
-            
-
-            dynamic parsed = JObject.Parse(json);
+            dynamic parsed = JObject.Parse(json2);
             dynamic body = parsed["body"];
 
-            //string body = "fsdfdsf";
-
-            //Type typ = body.GetType().Name;
-
-            JValue s = new JValue(body);
-            string type = s.Value.GetType().Name;
-            //ToLog(t);
-
-            if (type == "String")
+            if (body.GetType().Name == "JObject")
             {
-                ToLog("Все ОК");
-                
+                ToLog("Капча");
             }
             else
             {
-                ToLog("Капча");
+                ToLog("Все ОК");
             }
 
 
