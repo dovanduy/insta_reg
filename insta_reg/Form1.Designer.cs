@@ -38,7 +38,7 @@
             // 
             // btn_StartRegMail
             // 
-            this.btn_StartRegMail.Location = new System.Drawing.Point(312, 11);
+            this.btn_StartRegMail.Location = new System.Drawing.Point(264, 13);
             this.btn_StartRegMail.Name = "btn_StartRegMail";
             this.btn_StartRegMail.Size = new System.Drawing.Size(75, 21);
             this.btn_StartRegMail.TabIndex = 0;
@@ -77,7 +77,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(245, 11);
+            this.button1.Location = new System.Drawing.Point(515, 10);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 4;
