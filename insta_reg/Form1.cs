@@ -18,22 +18,24 @@ namespace insta_reg
 {
     public partial class Form1 : Form
     {
+        public const string antigate_key = "c84e9c641ae9112f5eae64b03110b186";
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        private void btn_StartRegMail_Click(object sender, EventArgs e)
+        private void RegMail(string name, string surname)
         {
-            //переменные
             string parametrs;
             CookieContainer Cook = new CookieContainer();
             string post;
-            string name = "Галина";
-            string surname = "Пирожкова";
             string login = Translit.Front(name + "." + surname);
-            //JsonConvert json;
-
+            login = login.ToLower();
+            Random rnd = new Random();
+            string year = Convert.ToString(rnd.Next(1980, 1998));
+            string month = Convert.ToString(rnd.Next(1, 12));
+            string day = Convert.ToString(rnd.Next(1, 28));
             //1  - заходим на сайт
             string url = "https://touch.mail.ru/cgi-bin/signup";
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
@@ -56,8 +58,8 @@ namespace insta_reg
             parametrs = "login=" + HttpUtility.UrlEncode(login);
             parametrs += "&domain=" + HttpUtility.UrlEncode("mail.ru");
             parametrs += "&sex=" + HttpUtility.UrlEncode("male");
-            parametrs += "&birthday=" + HttpUtility.UrlEncode("{\"year\":\"1980\",\"month\":\"1\",\"day\":\"20\"}");
-            parametrs += "&name=" + HttpUtility.UrlEncode("{\"first\":\""+ name + "\",\"last\":\""+ surname + "\"}");
+            parametrs += "&birthday=" + HttpUtility.UrlEncode("{\"year\":\""+year+"\",\"month\":\""+month+"\",\"day\":\""+day+"\"}");
+            parametrs += "&name=" + HttpUtility.UrlEncode("{\"first\":\"" + name + "\",\"last\":\"" + surname + "\"}");
             post = POST("https://touch.mail.ru/api/v1/user/signup", parametrs, Cook);
             ToLog(post);
             var js = JsonConvert.DeserializeObject<Json>(post);
@@ -68,23 +70,23 @@ namespace insta_reg
                 ToLog("Неверный логин");
                 parametrs = "email=" + HttpUtility.UrlEncode(login + "@mail.ru");
                 parametrs += "&login=" + HttpUtility.UrlEncode(login);
-                parametrs += "&birthday=" + HttpUtility.UrlEncode("{\"year\":\"1980\",\"month\":\"1\",\"day\":\"20\"}");
+                parametrs += "&birthday=" + HttpUtility.UrlEncode("{\"year\":\"" + year + "\",\"month\":\"" + month + "\",\"day\":\"" + day + "\"}");
                 post = POST("https://touch.mail.ru/api/v1/user/exists", parametrs, Cook);
                 js = JsonConvert.DeserializeObject<Json>(post);
                 string alternative = js.body.alternatives[0];
-                ToLog("Предложен логин: "+ alternative);
+                ToLog("Предложен логин: " + alternative);
 
                 // Отправляем с новым логином
                 Char delimiter = '@';
                 int pos = alternative.IndexOf(delimiter);
                 string login_new = alternative.Substring(0, pos);
-                string domain = alternative.Substring(pos+1, alternative.Length - login_new.Length - 1);
+                string domain = alternative.Substring(pos + 1, alternative.Length - login_new.Length - 1);
                 parametrs = "email=" + HttpUtility.UrlEncode(alternative);
                 parametrs = "&login=" + HttpUtility.UrlEncode(login_new);
                 parametrs += "&domain=" + HttpUtility.UrlEncode(domain);
                 parametrs += "&sex=" + HttpUtility.UrlEncode("male");
-                parametrs += "&birthday=" + HttpUtility.UrlEncode("{\"year\":\"1980\",\"month\":\"1\",\"day\":\"20\"}");
-                parametrs += "&name=" + HttpUtility.UrlEncode("{\"first\":\""+name+"\",\"last\":\""+surname+"\"}");
+                parametrs += "&birthday=" + HttpUtility.UrlEncode("{\"year\":\"" + year + "\",\"month\":\"" + month + "\",\"day\":\"" + day + "\"}");
+                parametrs += "&name=" + HttpUtility.UrlEncode("{\"first\":\"" + name + "\",\"last\":\"" + surname + "\"}");
                 parametrs += "&password=" + HttpUtility.UrlEncode(GenPass(10));
                 post = POST("https://touch.mail.ru/api/v1/user/signup", parametrs, Cook);
                 ToLog(post);
@@ -125,7 +127,7 @@ namespace insta_reg
                     bool good = false;
                     while (good == false)
                     {
-                        Thread.Sleep(2000);
+                        Thread.Sleep(3000);
                         string IsReady = IsReadyCapcha(capcha_id);
                         if (IsReady.IndexOf("OK|") > -1)
                         {
@@ -181,6 +183,14 @@ namespace insta_reg
                 */
 
             }
+        }
+
+        private void btn_StartRegMail_Click(object sender, EventArgs e)
+        {
+            string name = "Галина";
+            string surname = "Пирожкова";
+
+            RegMail(name, surname);
 
         }
 
@@ -254,7 +264,7 @@ namespace insta_reg
             //данные запроса
             string parametrs = "";
             parametrs = "method=" + HttpUtility.UrlEncode("base64"); ;
-            parametrs += "&key=" + HttpUtility.UrlEncode("c84e9c641ae9112f5eae64b03110b186");
+            parametrs += "&key=" + HttpUtility.UrlEncode(antigate_key);
             parametrs += "&body=" + HttpUtility.UrlEncode(base64);
             byte[] postData = Encoding.UTF8.GetBytes(parametrs);
             request.ContentLength = postData.Length;
@@ -291,16 +301,13 @@ namespace insta_reg
             request.Headers.Add(HttpRequestHeader.AcceptLanguage, "ru-RU");
             request.Headers.Add(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
             request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2486.0 Safari/537.36 Edge/13.10586";
-            //request.Host = "touch.mail.ru";
             request.KeepAlive = true;
             request.Headers.Add("Cache-Control", "no-cache");
             request.ServicePoint.Expect100Continue = false;
-            //request.CookieContainer = Cook;
             request.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
-            //данные запроса
             string parametrs = "";
             parametrs = "action=" + HttpUtility.UrlEncode("get"); ;
-            parametrs += "&key=" + HttpUtility.UrlEncode("c84e9c641ae9112f5eae64b03110b186");
+            parametrs += "&key=" + HttpUtility.UrlEncode(antigate_key);
             parametrs += "&id=" + HttpUtility.UrlEncode(captcha_id);
             byte[] postData = Encoding.UTF8.GetBytes(parametrs);
             request.ContentLength = postData.Length;
@@ -336,52 +343,7 @@ namespace insta_reg
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string json1 = @"{'body':{ 'reg_anketa.capcha':{ 'value': 'dgfdfgd', 'error': 'invalid'} },'email':'anton.popov@mail.ru','status':400,'htmlencoded':false}";
-            string json2 = @"{'body':'good','email':'anton.popov@mail.ru','status':400,'htmlencoded':false}";
 
-            dynamic parsed = JObject.Parse(json2);
-            dynamic body = parsed["body"];
-
-            if (body.GetType().Name == "JObject")
-            {
-                ToLog("Капча");
-            }
-            else
-            {
-                ToLog("Все ОК");
-            }
-
-
-            //ToLog(Translit.Front("Антон Попов"));
-            /*
-            string json_resp = "{\"Tracks\":[{\"Artist\":\"Artist1\",\"Album\":\"Album1\",\"Title\":\"Title1\",\"Year\":\"2015\"}]}";
-            ToLog(json_resp);
-            var js = JsonConvert.DeserializeObject<Json>(json_resp);
-            ToLog(js.body.login.value);*/
-            //ToLog(Json.Login);
-
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            /*
-            string captcha_res = "dgfdfgd";
-            parametrs = "email=" + HttpUtility.UrlEncode("anton.popov@mail.ru");
-            parametrs += "&htmlencoded=" + HttpUtility.UrlEncode("false");
-            parametrs += "&reg_anketa=" + HttpUtility.UrlEncode("{\"capcha\":\"" + captcha_res + "\",\"id\":\"" + captcha + "\"}");
-            post = POST("https://touch.mail.ru/api/v1/user/signup/confirm", parametrs, Cook);
-            dynamic parsed = JObject.Parse(post);
-            dynamic body = parsed["body"];
-            if (body.GetType().Name == "JObject")
-            {
-                string error = body["reg_anketa.capcha"]["value"];
-                ToLog("Капча " + error);
-            }
-            else
-            {
-                ToLog("Все ОК");
-            }
-            */
-        }
+        }        
     }
 }
