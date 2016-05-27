@@ -185,12 +185,67 @@ namespace insta_reg
             }
         }
 
-        private void btn_StartRegMail_Click(object sender, EventArgs e)
+        // Открытие файла
+        private static List<string> OpenFile(string file)
         {
+            if (file == "null")
+                throw new System.Exception("Укажите файл!");
+            if (File.Exists(file) != true)
+                throw new System.Exception("Указанный файл не найден!");
+            try
+            { 
+                var list = new List<string>();
+                FileStream fs = new FileStream(file, FileMode.Open, FileAccess.Read);
+                StreamReader sr = new StreamReader(fs, Encoding.Default);
+                while (!sr.EndOfStream)
+                {
+                    list.Add(sr.ReadLine());
+                }
+                fs.Close();
+                
+                return list;
+            }
+            catch
+            {
+                throw new System.Exception("Не получилось открыть файл");
+            }
+        }
+
+        private void btn_StartRegMail_Click(object sender, EventArgs e)
+        {              
+            // Получаем список имен
+            var names = new List<string>();
+            try
+            {
+                names = OpenFile(tB_names.Text);
+                int names_count = names.Count;
+                ToLog("Имен: "+ Convert.ToString(names_count));
+                foreach (string line in names)
+                    ToLog(line);
+            }
+            catch (Exception ex)
+            {
+                ToLog("Произошла ошибка: "+ ex.Message);
+            }
+
+            // Получаем список фамилий
+            var surnames = new List<string>();
+            try
+            {
+                surnames = OpenFile(tB_surnames.Text);
+                int surnames_count = surnames.Count;
+                ToLog("Фамилий: " + Convert.ToString(surnames_count));
+            }
+            catch (Exception ex)
+            {
+                ToLog("Произошла ошибка: " + ex.Message);
+            }
+
+
             string name = "Галина";
             string surname = "Пирожкова";
 
-            RegMail(name, surname);
+            //RegMail(name, surname);
 
         }
 
@@ -344,6 +399,14 @@ namespace insta_reg
         private void button1_Click(object sender, EventArgs e)
         {
 
-        }        
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            string file_names = Directory.GetCurrentDirectory() + @"\files\имена.txt";
+            string file_surnames = Directory.GetCurrentDirectory() + @"\files\фамилии.txt";
+            tB_names.Text= file_names;
+            tB_surnames.Text = file_surnames;
+        }
     }
 }
