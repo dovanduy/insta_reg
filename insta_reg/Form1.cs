@@ -13,6 +13,7 @@ using System.Web;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Threading;
+using System.Text.RegularExpressions;
 
 namespace insta_reg
 {
@@ -32,10 +33,15 @@ namespace insta_reg
             string post;
             string login = Translit.Front(name + "." + surname);
             login = login.ToLower();
+            string domain = "mail.ru";
+            string email = login + "@" + domain;
+            string pass = GenPass(10);
             Random rnd = new Random();
             string year = Convert.ToString(rnd.Next(1980, 1998));
             string month = Convert.ToString(rnd.Next(1, 12));
             string day = Convert.ToString(rnd.Next(1, 28));
+            string captcha = "";
+            
             //1  - заходим на сайт
             string url = "https://touch.mail.ru/cgi-bin/signup";
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
@@ -56,43 +62,79 @@ namespace insta_reg
 
             // 2 
             parametrs = "login=" + HttpUtility.UrlEncode(login);
-            parametrs += "&domain=" + HttpUtility.UrlEncode("mail.ru");
+            parametrs += "&domain=" + HttpUtility.UrlEncode(domain);
             parametrs += "&sex=" + HttpUtility.UrlEncode("male");
             parametrs += "&birthday=" + HttpUtility.UrlEncode("{\"year\":\""+year+"\",\"month\":\""+month+"\",\"day\":\""+day+"\"}");
             parametrs += "&name=" + HttpUtility.UrlEncode("{\"first\":\"" + name + "\",\"last\":\"" + surname + "\"}");
             post = POST("https://touch.mail.ru/api/v1/user/signup", parametrs, Cook);
-            ToLog(post);
+            //ToLog(post);
             var js = JsonConvert.DeserializeObject<Json>(post);
 
-            // Проверяем полученные данные
-            if (js.body.login.error == "exists")
+            /*
+            dynamic parsed = JObject.Parse(post);
+            dynamic body = parsed["body"];
+            if (body.GetType().Name == "JObject")
             {
-                ToLog("Неверный логин");
-                parametrs = "email=" + HttpUtility.UrlEncode(login + "@mail.ru");
-                parametrs += "&login=" + HttpUtility.UrlEncode(login);
-                parametrs += "&birthday=" + HttpUtility.UrlEncode("{\"year\":\"" + year + "\",\"month\":\"" + month + "\",\"day\":\"" + day + "\"}");
-                post = POST("https://touch.mail.ru/api/v1/user/exists", parametrs, Cook);
-                js = JsonConvert.DeserializeObject<Json>(post);
-                string alternative = js.body.alternatives[0];
-                ToLog("Предложен логин: " + alternative);
+                string error = body["reg_anketa.capcha"]["value"];
+                ToLog("Капча " + error);
+            }
+            else
+            {
 
-                // Отправляем с новым логином
-                Char delimiter = '@';
-                int pos = alternative.IndexOf(delimiter);
-                string login_new = alternative.Substring(0, pos);
-                string domain = alternative.Substring(pos + 1, alternative.Length - login_new.Length - 1);
-                parametrs = "email=" + HttpUtility.UrlEncode(alternative);
-                parametrs = "&login=" + HttpUtility.UrlEncode(login_new);
-                parametrs += "&domain=" + HttpUtility.UrlEncode(domain);
-                parametrs += "&sex=" + HttpUtility.UrlEncode("male");
-                parametrs += "&birthday=" + HttpUtility.UrlEncode("{\"year\":\"" + year + "\",\"month\":\"" + month + "\",\"day\":\"" + day + "\"}");
-                parametrs += "&name=" + HttpUtility.UrlEncode("{\"first\":\"" + name + "\",\"last\":\"" + surname + "\"}");
-                parametrs += "&password=" + HttpUtility.UrlEncode(GenPass(10));
-                post = POST("https://touch.mail.ru/api/v1/user/signup", parametrs, Cook);
-                ToLog(post);
-                Json2 js2 = JsonConvert.DeserializeObject<Json2>(post);
-                string captcha = js2.body;
-                ToLog(captcha);
+            }
+            */
+
+            // Если проблемы с логином
+            if (js.body.login != null)
+            {
+                // Если неправильный логин
+                if (js.body.login.error == "exists")
+                {
+                    //ToLog("Неверный логин");
+                    parametrs = "email=" + HttpUtility.UrlEncode(email);
+                    parametrs += "&login=" + HttpUtility.UrlEncode(login);
+                    parametrs += "&birthday=" + HttpUtility.UrlEncode("{\"year\":\"" + year + "\",\"month\":\"" + month + "\",\"day\":\"" + day + "\"}");
+                    post = POST("https://touch.mail.ru/api/v1/user/exists", parametrs, Cook);
+                    js = JsonConvert.DeserializeObject<Json>(post);
+                    email = js.body.alternatives[0];
+                    //ToLog("Предложен логин: " + email);
+
+                    // Отправляем с новым логином
+                    Char delimiter = '@';
+                    int pos = email.IndexOf(delimiter);
+                    login = email.Substring(0, pos);
+                    domain = email.Substring(pos + 1, email.Length - login.Length - 1);
+                    parametrs = "email=" + HttpUtility.UrlEncode(email);
+                    parametrs = "&login=" + HttpUtility.UrlEncode(login);
+                    parametrs += "&domain=" + HttpUtility.UrlEncode(domain);
+                    parametrs += "&sex=" + HttpUtility.UrlEncode("male");
+                    parametrs += "&birthday=" + HttpUtility.UrlEncode("{\"year\":\"" + year + "\",\"month\":\"" + month + "\",\"day\":\"" + day + "\"}");
+                    parametrs += "&name=" + HttpUtility.UrlEncode("{\"first\":\"" + name + "\",\"last\":\"" + surname + "\"}");
+                    parametrs += "&password=" + HttpUtility.UrlEncode(pass);
+                    post = POST("https://touch.mail.ru/api/v1/user/signup", parametrs, Cook);
+                    //ToLog(post);
+                    Json2 js2 = JsonConvert.DeserializeObject<Json2>(post);
+                    captcha = js2.body;
+                    //ToLog(captcha);
+                }
+            }
+            else
+            {
+                 // Отправляем все с паролем
+                    parametrs = "email=" + HttpUtility.UrlEncode(login + "@" + domain);
+                    parametrs = "&login=" + HttpUtility.UrlEncode(login);
+                    parametrs += "&domain=" + HttpUtility.UrlEncode(domain);
+                    parametrs += "&sex=" + HttpUtility.UrlEncode("male");
+                    parametrs += "&birthday=" + HttpUtility.UrlEncode("{\"year\":\"" + year + "\",\"month\":\"" + month + "\",\"day\":\"" + day + "\"}");
+                    parametrs += "&name=" + HttpUtility.UrlEncode("{\"first\":\"" + name + "\",\"last\":\"" + surname + "\"}");
+                    parametrs += "&password=" + HttpUtility.UrlEncode(pass);
+                    post = POST("https://touch.mail.ru/api/v1/user/signup", parametrs, Cook);
+                    //ToLog(post);
+                    Json2 js2 = JsonConvert.DeserializeObject<Json2>(post);
+                    captcha = js2.body;
+                    //ToLog(captcha);
+            }
+
 
                 // Получаем капчу
                 url = "https://c.mail.ru/6?r=0.71848591092699836";
@@ -132,9 +174,9 @@ namespace insta_reg
                         if (IsReady.IndexOf("OK|") > -1)
                         {
                             good = true;
-                            ToLog("капча разгадана");
+                            //ToLog("капча разгадана");
                             // завершаем регистрацию
-                            parametrs = "email=" + HttpUtility.UrlEncode(alternative);
+                            parametrs = "email=" + HttpUtility.UrlEncode(email);
                             parametrs += "&htmlencoded=" + HttpUtility.UrlEncode("false");
                             parametrs += "&reg_anketa=" + HttpUtility.UrlEncode("{\"capcha\":\"" + IsReady.Substring(3) + "\",\"id\":\"" + captcha + "\"}");
                             post = POST("https://touch.mail.ru/api/v1/user/signup/confirm", parametrs, Cook);
@@ -147,15 +189,11 @@ namespace insta_reg
                             }
                             else
                             {
-                                ToLog("Все ОК");
+                                string email2 = parsed["email"];
+                                ToLog(email2 + ";" + pass + ";" + name + " " + surname);
+                                //ToLog("Все ОК");
                                 url = body;
                                 // Заходим на страницу и проверяем успешность
-                                /*
-                                 * 
-                                 * 
-                                 * 
-                                 * 
-                                */
                             }
                         }
                     }
@@ -182,7 +220,7 @@ namespace insta_reg
                 }
                 */
 
-            }
+            
         }
 
         // Открытие файла
@@ -195,14 +233,21 @@ namespace insta_reg
             try
             { 
                 var list = new List<string>();
+                
                 FileStream fs = new FileStream(file, FileMode.Open, FileAccess.Read);
                 StreamReader sr = new StreamReader(fs, Encoding.Default);
                 while (!sr.EndOfStream)
                 {
-                    list.Add(sr.ReadLine());
+                    string line = sr.ReadLine();
+                    if (!string.IsNullOrWhiteSpace(line))
+                    {
+                        line = Regex.Replace(line, @"\s|\.|\( ", "");
+                        list.Add(line);
+                    } 
                 }
                 fs.Close();
-                
+                //string[] notWhiteSpace = File.ReadAllLines(file, Encoding.Default).Where(x => !string.IsNullOrWhiteSpace(x)).ToArray();
+                //list.AddRange(notWhiteSpace);
                 return list;
             }
             catch
@@ -215,37 +260,44 @@ namespace insta_reg
         {              
             // Получаем список имен
             var names = new List<string>();
+            int names_count = 0;
             try
             {
                 names = OpenFile(tB_names.Text);
-                int names_count = names.Count;
+                names_count = names.Count;
                 ToLog("Имен: "+ Convert.ToString(names_count));
-                foreach (string line in names)
-                    ToLog(line);
+                //foreach (string line in names)
+                  //  ToLog(line);
             }
             catch (Exception ex)
             {
-                ToLog("Произошла ошибка: "+ ex.Message);
+                ToLog("Произошла ошибка с файлом имен: "+ ex.Message);
             }
 
             // Получаем список фамилий
             var surnames = new List<string>();
+            int surnames_count = 0;
             try
             {
                 surnames = OpenFile(tB_surnames.Text);
-                int surnames_count = surnames.Count;
+                surnames_count = surnames.Count;
                 ToLog("Фамилий: " + Convert.ToString(surnames_count));
             }
             catch (Exception ex)
             {
-                ToLog("Произошла ошибка: " + ex.Message);
+                ToLog("Произошла ошибка с файлом фамилий: " + ex.Message);
             }
 
-
-            string name = "Галина";
-            string surname = "Пирожкова";
-
-            //RegMail(name, surname);
+            Random rnd = new Random();
+            int i;
+            for (i=0;i<10;i++)
+            {
+                int rand_name = rnd.Next(0, names_count);
+                int rand_surname = rnd.Next(0, surnames_count);
+                RegMail(names[rand_name], surnames[rand_surname]);
+            }
+            
+            
 
         }
 
