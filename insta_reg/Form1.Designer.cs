@@ -37,12 +37,15 @@
             this.label3 = new System.Windows.Forms.Label();
             this.tB_names = new System.Windows.Forms.TextBox();
             this.tB_surnames = new System.Windows.Forms.TextBox();
+            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nUD_CountMail)).BeginInit();
             this.SuspendLayout();
             // 
             // btn_StartRegMail
             // 
-            this.btn_StartRegMail.Location = new System.Drawing.Point(120, 118);
+            this.btn_StartRegMail.Location = new System.Drawing.Point(119, 75);
             this.btn_StartRegMail.Name = "btn_StartRegMail";
             this.btn_StartRegMail.Size = new System.Drawing.Size(145, 39);
             this.btn_StartRegMail.TabIndex = 0;
@@ -53,7 +56,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(15, 117);
+            this.label1.Location = new System.Drawing.Point(14, 74);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(84, 13);
             this.label1.TabIndex = 1;
@@ -61,7 +64,7 @@
             // 
             // nUD_CountMail
             // 
-            this.nUD_CountMail.Location = new System.Drawing.Point(18, 136);
+            this.nUD_CountMail.Location = new System.Drawing.Point(17, 93);
             this.nUD_CountMail.Name = "nUD_CountMail";
             this.nUD_CountMail.Size = new System.Drawing.Size(96, 20);
             this.nUD_CountMail.TabIndex = 2;
@@ -73,15 +76,16 @@
             // 
             // tB_Log
             // 
-            this.tB_Log.Location = new System.Drawing.Point(13, 165);
+            this.tB_Log.Location = new System.Drawing.Point(296, 75);
             this.tB_Log.Multiline = true;
             this.tB_Log.Name = "tB_Log";
-            this.tB_Log.Size = new System.Drawing.Size(577, 177);
+            this.tB_Log.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.tB_Log.Size = new System.Drawing.Size(442, 73);
             this.tB_Log.TabIndex = 3;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(515, 9);
+            this.button1.Location = new System.Drawing.Point(367, 12);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 4;
@@ -121,11 +125,42 @@
             this.tB_surnames.Size = new System.Drawing.Size(244, 20);
             this.tB_surnames.TabIndex = 8;
             // 
+            // webBrowser1
+            // 
+            this.webBrowser1.Location = new System.Drawing.Point(12, 172);
+            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser1.Name = "webBrowser1";
+            this.webBrowser1.Size = new System.Drawing.Size(726, 338);
+            this.webBrowser1.TabIndex = 9;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(12, 134);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 10;
+            this.button2.Text = "браузер";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(93, 134);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 11;
+            this.button3.Text = "button3";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(602, 354);
+            this.ClientSize = new System.Drawing.Size(750, 522);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.webBrowser1);
             this.Controls.Add(this.tB_surnames);
             this.Controls.Add(this.tB_names);
             this.Controls.Add(this.label3);
@@ -155,6 +190,9 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox tB_names;
         private System.Windows.Forms.TextBox tB_surnames;
+        private System.Windows.Forms.WebBrowser webBrowser1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
     }
 }
 
