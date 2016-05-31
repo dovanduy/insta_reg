@@ -72,7 +72,7 @@
             this.nUD_CountMail.Size = new System.Drawing.Size(96, 20);
             this.nUD_CountMail.TabIndex = 2;
             this.nUD_CountMail.Value = new decimal(new int[] {
-            10,
+            1,
             0,
             0,
             0});

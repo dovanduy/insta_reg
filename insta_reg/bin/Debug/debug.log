@@ -156,3 +156,115 @@
    в System.Windows.Forms.WindowsFormsSynchronizationContext.Send(SendOrPostCallback d, Object state)
    в Awesomium.Core.WebCore.wvjjlbeQdqUVO5E6FXD(Object , Object , Object )
    в Awesomium.Core.WebCore.ioXQMTP1sf()
+[0531/215424:INFO:(0)] WebCore is now online.
+[0531/215424:INFO:(0)] Running Awesomium 1.7.5.1
+[0531/215442:WARNING:Awesomium.NET(0)] System.ComponentModel.InvalidAsynchronousStateException: При вызове данного метода произошла ошибка.  Поток-получатель больше не существует.
+   в System.Windows.Forms.WindowsFormsSynchronizationContext.Send(SendOrPostCallback d, Object state)
+   в Awesomium.Core.WebCore.wvjjlbeQdqUVO5E6FXD(Object , Object , Object )
+   в Awesomium.Core.WebCore.ioXQMTP1sf()
+[0531/231815:INFO:(0)] WebCore is now online.
+[0531/231816:INFO:(0)] Running Awesomium 1.7.5.1
+[0531/231955:WARNING:Awesomium.NET(0)] System.ComponentModel.InvalidAsynchronousStateException: При вызове данного метода произошла ошибка.  Поток-получатель больше не существует.
+   в System.Windows.Forms.WindowsFormsSynchronizationContext.Send(SendOrPostCallback d, Object state)
+   в Awesomium.Core.WebCore.wvjjlbeQdqUVO5E6FXD(Object , Object , Object )
+   в Awesomium.Core.WebCore.ioXQMTP1sf()
+[0531/232119:INFO:(0)] WebCore is now online.
+[0531/232119:INFO:(0)] Running Awesomium 1.7.5.1
+[0531/232133:WARNING:Awesomium.NET(0)] System.ComponentModel.InvalidAsynchronousStateException: При вызове данного метода произошла ошибка.  Поток-получатель больше не существует.
+   в System.Windows.Forms.WindowsFormsSynchronizationContext.Send(SendOrPostCallback d, Object state)
+   в Awesomium.Core.WebCore.wvjjlbeQdqUVO5E6FXD(Object , Object , Object )
+   в Awesomium.Core.WebCore.ioXQMTP1sf()
+[0531/232212:INFO:(0)] WebCore is now online.
+[0531/232212:INFO:(0)] Running Awesomium 1.7.5.1
+[0531/232234:WARNING:Awesomium.NET(0)] System.ComponentModel.InvalidAsynchronousStateException: При вызове данного метода произошла ошибка.  Поток-получатель больше не существует.
+   в System.Windows.Forms.WindowsFormsSynchronizationContext.Send(SendOrPostCallback d, Object state)
+   в Awesomium.Core.WebCore.wvjjlbeQdqUVO5E6FXD(Object , Object , Object )
+   в Awesomium.Core.WebCore.ioXQMTP1sf()
+[0531/233054:INFO:(0)] WebCore is now online.
+[0531/233054:INFO:(0)] Running Awesomium 1.7.5.1
+[0531/233128:WARNING:Awesomium.NET(0)] System.ComponentModel.InvalidAsynchronousStateException: При вызове данного метода произошла ошибка.  Поток-получатель больше не существует.
+   в System.Windows.Forms.WindowsFormsSynchronizationContext.Send(SendOrPostCallback d, Object state)
+   в Awesomium.Core.WebCore.wvjjlbeQdqUVO5E6FXD(Object , Object , Object )
+   в Awesomium.Core.WebCore.ioXQMTP1sf()
+[0531/233350:INFO:(0)] WebCore is now online.
+[0531/233350:INFO:(0)] Running Awesomium 1.7.5.1
+[0531/233404:WARNING:Awesomium.NET(0)] System.ComponentModel.InvalidAsynchronousStateException: При вызове данного метода произошла ошибка.  Поток-получатель больше не существует.
+   в System.Windows.Forms.WindowsFormsSynchronizationContext.Send(SendOrPostCallback d, Object state)
+   в Awesomium.Core.WebCore.wvjjlbeQdqUVO5E6FXD(Object , Object , Object )
+   в Awesomium.Core.WebCore.ioXQMTP1sf()
+[0531/233502:INFO:(0)] WebCore is now online.
+[0531/233502:INFO:(0)] Running Awesomium 1.7.5.1
+[0531/233515:WARNING:Awesomium.NET(0)] System.ComponentModel.InvalidAsynchronousStateException: При вызове данного метода произошла ошибка.  Поток-получатель больше не существует.
+   в System.Windows.Forms.WindowsFormsSynchronizationContext.Send(SendOrPostCallback d, Object state)
+   в Awesomium.Core.WebCore.wvjjlbeQdqUVO5E6FXD(Object , Object , Object )
+   в Awesomium.Core.WebCore.ioXQMTP1sf()
+[0531/233525:INFO:(0)] WebCore is now online.
+[0531/233525:INFO:(0)] Running Awesomium 1.7.5.1
+[0531/234256:INFO:(0)] WebCore is now online.
+[0531/234256:INFO:(0)] Running Awesomium 1.7.5.1
+[0531/234615:WARNING:Awesomium.NET(0)] System.ComponentModel.InvalidAsynchronousStateException: При вызове данного метода произошла ошибка.  Поток-получатель больше не существует.
+   в System.Windows.Forms.WindowsFormsSynchronizationContext.Send(SendOrPostCallback d, Object state)
+   в Awesomium.Core.WebCore.wvjjlbeQdqUVO5E6FXD(Object , Object , Object )
+   в Awesomium.Core.WebCore.ioXQMTP1sf()
+[0531/234648:INFO:(0)] WebCore is now online.
+[0531/234648:INFO:(0)] Running Awesomium 1.7.5.1
+[0531/234707:WARNING:Awesomium.NET(0)] System.ComponentModel.InvalidAsynchronousStateException: При вызове данного метода произошла ошибка.  Поток-получатель больше не существует.
+   в System.Windows.Forms.WindowsFormsSynchronizationContext.Send(SendOrPostCallback d, Object state)
+   в Awesomium.Core.WebCore.wvjjlbeQdqUVO5E6FXD(Object , Object , Object )
+   в Awesomium.Core.WebCore.ioXQMTP1sf()
+[0531/235857:INFO:(0)] WebCore is now online.
+[0531/235857:INFO:(0)] Running Awesomium 1.7.5.1
+[0531/235913:WARNING:Awesomium.NET(0)] Awesomium.Core.AweInvalidOperationException: The calling thread cannot access this object because a different thread owns it.
+
+
+[0531/235916:WARNING:Awesomium.NET(0)] Awesomium.Core.AweInvalidOperationException: The calling thread cannot access this object because a different thread owns it.
+
+
+[0601/000234:INFO:(0)] WebCore is now online.
+[0601/000234:INFO:(0)] Running Awesomium 1.7.5.1
+[0601/000251:WARNING:Awesomium.NET(0)] System.ComponentModel.InvalidAsynchronousStateException: При вызове данного метода произошла ошибка.  Поток-получатель больше не существует.
+   в System.Windows.Forms.WindowsFormsSynchronizationContext.Send(SendOrPostCallback d, Object state)
+   в Awesomium.Core.WebCore.wvjjlbeQdqUVO5E6FXD(Object , Object , Object )
+   в Awesomium.Core.WebCore.ioXQMTP1sf()
+[0601/000423:INFO:(0)] WebCore is now online.
+[0601/000423:INFO:(0)] Running Awesomium 1.7.5.1
+[0601/000438:WARNING:Awesomium.NET(0)] System.ComponentModel.InvalidAsynchronousStateException: При вызове данного метода произошла ошибка.  Поток-получатель больше не существует.
+   в System.Windows.Forms.WindowsFormsSynchronizationContext.Send(SendOrPostCallback d, Object state)
+   в Awesomium.Core.WebCore.wvjjlbeQdqUVO5E6FXD(Object , Object , Object )
+   в Awesomium.Core.WebCore.ioXQMTP1sf()
+[0601/000556:INFO:(0)] WebCore is now online.
+[0601/000556:INFO:(0)] Running Awesomium 1.7.5.1
+[0601/000606:WARNING:Awesomium.NET(0)] Awesomium.Core.AweInvalidOperationException: The calling thread cannot access this object because a different thread owns it.
+
+
+[0601/000608:WARNING:Awesomium.NET(0)] Awesomium.Core.AweInvalidOperationException: The calling thread cannot access this object because a different thread owns it.
+
+
+[0601/000715:INFO:(0)] WebCore is now online.
+[0601/000715:INFO:(0)] Running Awesomium 1.7.5.1
+[0601/000734:WARNING:Awesomium.NET(0)] System.ComponentModel.InvalidAsynchronousStateException: При вызове данного метода произошла ошибка.  Поток-получатель больше не существует.
+   в System.Windows.Forms.WindowsFormsSynchronizationContext.Send(SendOrPostCallback d, Object state)
+   в Awesomium.Core.WebCore.wvjjlbeQdqUVO5E6FXD(Object , Object , Object )
+   в Awesomium.Core.WebCore.ioXQMTP1sf()
+[0601/000749:INFO:(0)] WebCore is now online.
+[0601/000749:INFO:(0)] Running Awesomium 1.7.5.1
+[0601/000801:WARNING:Awesomium.NET(0)] System.ComponentModel.InvalidAsynchronousStateException: При вызове данного метода произошла ошибка.  Поток-получатель больше не существует.
+   в System.Windows.Forms.WindowsFormsSynchronizationContext.Send(SendOrPostCallback d, Object state)
+   в Awesomium.Core.WebCore.wvjjlbeQdqUVO5E6FXD(Object , Object , Object )
+   в Awesomium.Core.WebCore.ioXQMTP1sf()
+[0601/002505:INFO:(0)] WebCore is now online.
+[0601/002505:INFO:(0)] Running Awesomium 1.7.5.1
+[0601/003039:INFO:(0)] WebCore is now online.
+[0601/003039:INFO:(0)] Running Awesomium 1.7.5.1
+[0601/003057:WARNING:Awesomium.NET(0)] System.ComponentModel.InvalidAsynchronousStateException: При вызове данного метода произошла ошибка.  Поток-получатель больше не существует.
+   в System.Windows.Forms.WindowsFormsSynchronizationContext.Send(SendOrPostCallback d, Object state)
+   в Awesomium.Core.WebCore.wvjjlbeQdqUVO5E6FXD(Object , Object , Object )
+   в Awesomium.Core.WebCore.ioXQMTP1sf()
+[0601/003100:INFO:(0)] WebCore is now online.
+[0601/003100:INFO:(0)] Running Awesomium 1.7.5.1
+[0601/003131:WARNING:Awesomium.NET(0)] Awesomium.Core.AweInvalidOperationException: The calling thread cannot access this object because a different thread owns it.
+
+
+[0601/003133:WARNING:Awesomium.NET(0)] Awesomium.Core.AweInvalidOperationException: The calling thread cannot access this object because a different thread owns it.
+
+

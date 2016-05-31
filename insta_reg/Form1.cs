@@ -127,7 +127,7 @@ namespace insta_reg
                 // 
                 string res = mailreg.Reger(names[rand_name], surnames[rand_surname], sex, GenPass(10));
                 ToLog(res);
-                //RegFB(res);
+                RegFB2(res);
             }
             
             
@@ -193,6 +193,82 @@ namespace insta_reg
         {
             //throw new NotImplementedException();
             Loaded = true;
+        }
+
+        public void RegFB2(string data)
+        {
+            string[] d = data.Split(';');
+            string name = d[2];
+            string surname = d[3];
+            string email = d[0];
+            string bday = d[4];
+            string bmonth = d[5];
+            string byear = d[6];
+            string sex = d[7];
+            string pass = d[1];
+            //
+            webControl1.Source = new Uri("https://m.facebook.com/");
+            webControl1.LoadingFrameComplete += (s, m) =>
+            {
+                if (m.IsMainFrame)
+                    Loaded = true;
+            };
+            while (!Loaded)
+            {
+                Thread.Sleep(50);
+                WebCore.Update();
+            }
+            //ToLog("ищем кнопку регистрации");
+            dynamic document = (JSObject)webControl1.ExecuteJavascriptWithResult("document");
+            using (document)
+            {
+                dynamic elem = document.getElementsByClassName("_54k8 _56bs _56bw _56bv");
+                elem[0].click();
+            }
+            Loaded = false;
+            webControl1.LoadingFrameComplete += (s, m) =>
+            {
+                if (m.IsMainFrame)
+                    Loaded = true;
+            };
+            while (!Loaded)
+            {
+                Thread.Sleep(50);
+                WebCore.Update();
+            }
+            //ToLog("Заполняю поля");
+            document = (JSObject)webControl1.ExecuteJavascriptWithResult("document");
+            using (document)
+            {
+                dynamic elem = document.getElementsByTagName("input");
+                for (int i = 0; i < elem.length; i++)
+                //foreach(var el in elem)
+                {
+                    if (elem[i].getAttribute("name") == "firstname")
+                        elem[i].setAttribute("value", name);
+                    if (elem[i].getAttribute("name") == "lastname")
+                        elem[i].setAttribute("value", surname);
+                    if (elem[i].getAttribute("name") == "reg_email__")
+                        elem[i].setAttribute("value", email);
+                    if (elem[i].getAttribute("name") == "birthday_day")
+                        elem[i].setAttribute("value", bday);
+                    if (elem[i].getAttribute("name") == "birthday_month")
+                        elem[i].setAttribute("value", bmonth);
+                    if (elem[i].getAttribute("name") == "birthday_year")
+                        elem[i].setAttribute("value", byear);
+                    if (elem[i].getAttribute("name") == "reg_passwd__")
+                        elem[i].setAttribute("value", pass);
+                }
+
+                elem = document.getElementsByTagName("select");
+                for (int i = 0; i < elem.length; i++)
+                {
+                    if (elem[i].getAttribute("name") == "sex")
+                        elem[i].setAttribute("value", sex);
+                }
+                elem = document.getElementsByClassName("_54k8 _56bs _56b_ _56bv");
+                elem[0].click();
+            }
         }
 
         public void RegFB(string data)
@@ -268,57 +344,62 @@ namespace insta_reg
             };
             while (!Loaded)
             {
-                Thread.Sleep(100);
+                Thread.Sleep(50);
                 WebCore.Update();
             }
-            ToLog("ищем кнопку регистрации");
+            //ToLog("ищем кнопку регистрации");
             dynamic document = (JSObject)webControl1.ExecuteJavascriptWithResult("document");
             using (document)
             {
-                //dynamic elem = document.getElementById("u_0_5");
                 dynamic elem = document.getElementsByClassName("_54k8 _56bs _56bw _56bv");
                 elem[0].click();
-                /*
-                for (int i = 0; i < buttons.length; i++)
-                {
-                    if (a[i].value == "Вход")
-                    {
-                        buttons[i].click(); break;
-                    }
-                }*/
-                /*
-                using (elem)
-                    elem.click();*/
             }
-            /*
-            dynamic document = (JSObject)webControl1.ExecuteJavascriptWithResult("document");
-            
-            var a = document.getElementsByClassName("_55sr");
-            ToLog(a.value);
-            a.click();*/
-            /*
-            using (dynamic document = (JSObject)webControl1.ExecuteJavascriptWithResult("document"))
+            Loaded = false;
+            webControl1.LoadingFrameComplete += (s, m) =>
             {
-                var a = document.getElementsByClassName("_54k8 _56bs _56bw _56bv");
-                a.click(); 
-                
-                for (int i = 0; i < buttons.length; i++)
-                {
-                    if (buttons[i].value == "Создать новый аккаунт")
-                    {
-                        buttons[i].click(); break;
-                    }
-                }
+                if (m.IsMainFrame)
+                    Loaded = true;
+            };
+            while (!Loaded)
+            {
+                Thread.Sleep(50);
+                WebCore.Update();
             }
-            //elems = webBrowser1.Document.GetElementsByTagName("a");
+            //ToLog("Заполняю поля");
             /*
-            foreach (HtmlElement a in elems)
+            document = (JSObject)webControl1.ExecuteJavascriptWithResult("document");
+            using (document)
             {
-                if (a.GetAttribute("className") == "_54k8 _56bs _56bw _56bv")
-                {
-                    a.InvokeMember("click");
-                }
+                dynamic elem = document.getElementsByClassName("_54k8 _56bs _56b_ _56bv");
+                elem[0].click();
             }*/
+            
+            document = (JSObject)webControl1.ExecuteJavascriptWithResult("document");
+            using (document)
+            {
+                dynamic elem = document.getElementsByTagName("input");
+                for (int i = 0; i < elem.length; i++)
+                //foreach(var el in elem)
+                {
+                    if (elem[i].getAttribute("name") == "firstname")
+                        elem[i].setAttribute("value", "Fynjy");
+                    if (elem[i].getAttribute("name") == "lastname")
+                        elem[i].setAttribute("value", "45645fff");
+                    /*
+                    if (el.GetAttribute("name") == "reg_email__")
+                        el.SetAttribute("value", email);
+                    if (el.GetAttribute("name") == "birthday_day")
+                        el.SetAttribute("value", bday);
+                    if (el.GetAttribute("name") == "birthday_month")
+                        el.SetAttribute("value", bmonth);
+                    if (el.GetAttribute("name") == "birthday_year")
+                        el.SetAttribute("value", byear);
+                    if (el.GetAttribute("name") == "reg_passwd__")
+                        el.SetAttribute("value", pass);*/
+                }
+            }
+
+
         }
         // Предусмотреть очистку в классах регистрации
         // Обработчик занятого логина в ФБ
