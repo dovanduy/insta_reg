@@ -14,7 +14,7 @@ namespace insta_reg
 {
     class RegMail
     {
-        public string Reger(string name, string surname, string pass)
+        public string Reger(string name, string surname, string sex, string pass)
         {
             string parametrs;
             CookieContainer Cook = new CookieContainer();
@@ -28,6 +28,10 @@ namespace insta_reg
             string year = Convert.ToString(rnd.Next(1980, 1998));
             string month = Convert.ToString(rnd.Next(1, 12));
             string day = Convert.ToString(rnd.Next(1, 28));
+            // пол
+            string sexxx="female";
+            if (sex == "2")
+                sexxx = "male";
             string captcha = "";
 
             //1  - заходим на сайт
@@ -45,7 +49,7 @@ namespace insta_reg
             StreamReader reader = new StreamReader(response.GetResponseStream());
             parametrs = "login=" + HttpUtility.UrlEncode(login);
             parametrs += "&domain=" + HttpUtility.UrlEncode(domain);
-            parametrs += "&sex=" + HttpUtility.UrlEncode("male");
+            parametrs += "&sex=" + HttpUtility.UrlEncode(sexxx);
             parametrs += "&birthday=" + HttpUtility.UrlEncode("{\"year\":\"" + year + "\",\"month\":\"" + month + "\",\"day\":\"" + day + "\"}");
             parametrs += "&name=" + HttpUtility.UrlEncode("{\"first\":\"" + name + "\",\"last\":\"" + surname + "\"}");
             post = POST("https://touch.mail.ru/api/v1/user/signup", parametrs, Cook);
@@ -72,7 +76,7 @@ namespace insta_reg
                 parametrs = "email=" + HttpUtility.UrlEncode(email);
                 parametrs = "&login=" + HttpUtility.UrlEncode(login);
                 parametrs += "&domain=" + HttpUtility.UrlEncode(domain);
-                parametrs += "&sex=" + HttpUtility.UrlEncode("male");
+                parametrs += "&sex=" + HttpUtility.UrlEncode(sexxx);
                 parametrs += "&birthday=" + HttpUtility.UrlEncode("{\"year\":\"" + year + "\",\"month\":\"" + month + "\",\"day\":\"" + day + "\"}");
                 parametrs += "&name=" + HttpUtility.UrlEncode("{\"first\":\"" + name + "\",\"last\":\"" + surname + "\"}");
                 parametrs += "&password=" + HttpUtility.UrlEncode(pass);
@@ -88,7 +92,7 @@ namespace insta_reg
                 parametrs = "email=" + HttpUtility.UrlEncode(login + "@" + domain);
                 parametrs = "&login=" + HttpUtility.UrlEncode(login);
                 parametrs += "&domain=" + HttpUtility.UrlEncode(domain);
-                parametrs += "&sex=" + HttpUtility.UrlEncode("male");
+                parametrs += "&sex=" + HttpUtility.UrlEncode(sexxx);
                 parametrs += "&birthday=" + HttpUtility.UrlEncode("{\"year\":\"" + year + "\",\"month\":\"" + month + "\",\"day\":\"" + day + "\"}");
                 parametrs += "&name=" + HttpUtility.UrlEncode("{\"first\":\"" + name + "\",\"last\":\"" + surname + "\"}");
                 parametrs += "&password=" + HttpUtility.UrlEncode(pass);
@@ -159,7 +163,7 @@ namespace insta_reg
                             string email2 = parsed["email"];
                             //ToLog(email2 + ";" + pass + ";" + name + " " + surname);
                             //ToLog("Все ОК");
-                            return email2 + ";" + pass + ";" + name + ";" + surname + ";" + day + "." + month +"." + year;
+                            return email2 + ";" + pass + ";" + name + ";" + surname + ";" + day + ";" + month +";" + year + ";" + sex;
                             //url = body;
                             // Заходим на страницу и проверяем успешность
                         }

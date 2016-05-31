@@ -14,6 +14,8 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Threading;
 using System.Text.RegularExpressions;
+using mshtml;
+using Awesomium.Core;
 
 namespace insta_reg
 {
@@ -21,9 +23,20 @@ namespace insta_reg
     {
         public const string antigate_key = "c84e9c641ae9112f5eae64b03110b186";
 
+        public bool Loaded = false;
+
         public Form1()
         {
+            //InitializeComponent();
+            //WebCore.Initialize(new WebConfig() { UserAgent = "123" });
+            WebCore.Initialize(new WebConfig());
+            WebPreferences wp = new WebPreferences();
+            wp.AcceptLanguage = "ru-ru";
+            WebSession ws = WebCore.CreateWebSession(wp);
+
             InitializeComponent();
+
+            webControl1.WebSession = ws;
         }
 
         // Открытие файла
@@ -92,6 +105,17 @@ namespace insta_reg
                 ToLog("Произошла ошибка с файлом фамилий: " + ex.Message);
             }
 
+            // Устанавливаем пол
+            string sex = "";
+            if (rb_women.Checked == true)
+            {
+                sex = "1";
+            }
+            else if (rb_men.Checked == true)
+            {
+                sex = "2";
+            }
+
             Random rnd = new Random();
             int i;
             int max = Convert.ToInt32(nUD_CountMail.Value);
@@ -100,7 +124,10 @@ namespace insta_reg
                 RegMail mailreg = new RegMail();
                 int rand_name = rnd.Next(0, names_count);
                 int rand_surname = rnd.Next(0, surnames_count);
-                ToLog(mailreg.Reger(names[rand_name], surnames[rand_surname], GenPass(10)));
+                // 
+                string res = mailreg.Reger(names[rand_name], surnames[rand_surname], sex, GenPass(10));
+                ToLog(res);
+                //RegFB(res);
             }
             
             
@@ -153,34 +180,147 @@ namespace insta_reg
             string file_surnames = Directory.GetCurrentDirectory() + @"\files\фамилии.txt";
             tB_names.Text= file_names;
             tB_surnames.Text = file_surnames;
+            rb_men.Checked = true;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            webBrowser1.Navigate("https://m.facebook.com/");
 
+            RegFB("lozovskij@bk.ru;i82ikdrvpn;Валентин;Лозовский;8;5;1980;2");
+        }
+
+        private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            //throw new NotImplementedException();
+            Loaded = true;
+        }
+
+        public void RegFB(string data)
+        {
+            string[] d = data.Split(';');
+            string name = d[2];
+            string surname = d[3];
+            string email = d[0];
+            string bday = d[4];
+            string bmonth = d[5];
+            string byear = d[6];
+            string sex = d[7];
+            string pass = d[1];
+
+            HtmlElementCollection elems;
+            //webBrowser1.Navigate("https://m.facebook.com/", "_self", null, "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2486.0 Safari/537.36 Edge/13.10586");
+            //webBrowser1.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(webBrowser1_DocumentCompleted);
+            // нажимаем кнопку
+            /*
+            Loaded = false;
+            while (!Loaded)
+            {
+                Application.DoEvents();
+            }
+            elems = webBrowser1.Document.GetElementsByTagName("a");
+            foreach (HtmlElement a in elems)
+            {
+                if (a.GetAttribute("className") == "n o bs bp q")
+                {
+                    a.InvokeMember("click");
+                }
+            }
+            // заполняем поля
+            Loaded = false;
+            while (!Loaded)
+            {
+                Application.DoEvents();
+            }
+            elems = webBrowser1.Document.GetElementsByTagName("input");
+            foreach (HtmlElement el in elems)
+            {
+                if (el.GetAttribute("name") == "firstname")
+                    el.SetAttribute("value", name);
+                if (el.GetAttribute("name") == "lastname")
+                    el.SetAttribute("value", surname);
+                if (el.GetAttribute("name") == "reg_email__")
+                    el.SetAttribute("value", email);
+                if (el.GetAttribute("name") == "birthday_day")
+                    el.SetAttribute("value", bday);
+                if (el.GetAttribute("name") == "birthday_month")
+                    el.SetAttribute("value", bmonth);
+                if (el.GetAttribute("name") == "birthday_year")
+                    el.SetAttribute("value", byear);
+                if (el.GetAttribute("name") == "reg_passwd__")
+                    el.SetAttribute("value", pass);
+            }
+            elems = webBrowser1.Document.GetElementsByTagName("select");
+            foreach (HtmlElement el in elems)
+            {
+                if (el.GetAttribute("name") == "sex")
+                    el.SetAttribute("value", sex);
+            }
+            */
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            mshtml.HTMLDocument doc = axWebBrowser1.Document as mshtml.HTMLDocument;
-            foreach (IHTMLElement a in doc.all)
+            webControl1.Source = new Uri("https://m.facebook.com/");
+            webControl1.LoadingFrameComplete += (s, m) =>
             {
-                if ((a.className == "ok-btn-go ok-btn") &&
-                    (a.tagName == "A"))
+                if (m.IsMainFrame)
+                    Loaded = true;
+            };
+            while (!Loaded)
+            {
+                Thread.Sleep(100);
+                WebCore.Update();
+            }
+            ToLog("ищем кнопку регистрации");
+            dynamic document = (JSObject)webControl1.ExecuteJavascriptWithResult("document");
+            using (document)
+            {
+                //dynamic elem = document.getElementById("u_0_5");
+                dynamic elem = document.getElementsByClassName("_54k8 _56bs _56bw _56bv");
+                elem[0].click();
+                /*
+                for (int i = 0; i < buttons.length; i++)
                 {
-                    a.click();
+                    if (a[i].value == "Вход")
+                    {
+                        buttons[i].click(); break;
+                    }
+                }*/
+                /*
+                using (elem)
+                    elem.click();*/
+            }
+            /*
+            dynamic document = (JSObject)webControl1.ExecuteJavascriptWithResult("document");
+            
+            var a = document.getElementsByClassName("_55sr");
+            ToLog(a.value);
+            a.click();*/
+            /*
+            using (dynamic document = (JSObject)webControl1.ExecuteJavascriptWithResult("document"))
+            {
+                var a = document.getElementsByClassName("_54k8 _56bs _56bw _56bv");
+                a.click(); 
+                
+                for (int i = 0; i < buttons.length; i++)
+                {
+                    if (buttons[i].value == "Создать новый аккаунт")
+                    {
+                        buttons[i].click(); break;
+                    }
                 }
             }
-
-            foreach (HtmlElement he in webBrowser1.Document.GetElementsByTagName("span"))
+            //elems = webBrowser1.Document.GetElementsByTagName("a");
+            /*
+            foreach (HtmlElement a in elems)
             {
-                ToLog(he.OuterHtml);
-            }
+                if (a.GetAttribute("className") == "_54k8 _56bs _56bw _56bv")
+                {
+                    a.InvokeMember("click");
+                }
+            }*/
         }
+        // Предусмотреть очистку в классах регистрации
+        // Обработчик занятого логина в ФБ
     }
 }
-
-
-// Предусмотреть очистку в классах регистрации
-// Обработчик занятого логина в ФБ

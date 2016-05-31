@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btn_StartRegMail = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.nUD_CountMail = new System.Windows.Forms.NumericUpDown();
@@ -37,9 +38,11 @@
             this.label3 = new System.Windows.Forms.Label();
             this.tB_names = new System.Windows.Forms.TextBox();
             this.tB_surnames = new System.Windows.Forms.TextBox();
-            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.rb_men = new System.Windows.Forms.RadioButton();
+            this.rb_women = new System.Windows.Forms.RadioButton();
+            this.webControl1 = new Awesomium.Windows.Forms.WebControl(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.nUD_CountMail)).BeginInit();
             this.SuspendLayout();
             // 
@@ -76,16 +79,16 @@
             // 
             // tB_Log
             // 
-            this.tB_Log.Location = new System.Drawing.Point(296, 75);
+            this.tB_Log.Location = new System.Drawing.Point(12, 163);
             this.tB_Log.Multiline = true;
             this.tB_Log.Name = "tB_Log";
             this.tB_Log.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tB_Log.Size = new System.Drawing.Size(442, 73);
+            this.tB_Log.Size = new System.Drawing.Size(302, 347);
             this.tB_Log.TabIndex = 3;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(367, 12);
+            this.button1.Location = new System.Drawing.Point(663, 9);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 4;
@@ -125,14 +128,6 @@
             this.tB_surnames.Size = new System.Drawing.Size(244, 20);
             this.tB_surnames.TabIndex = 8;
             // 
-            // webBrowser1
-            // 
-            this.webBrowser1.Location = new System.Drawing.Point(12, 172);
-            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(726, 338);
-            this.webBrowser1.TabIndex = 9;
-            // 
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(12, 134);
@@ -153,14 +148,45 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
+            // rb_men
+            // 
+            this.rb_men.AutoSize = true;
+            this.rb_men.Location = new System.Drawing.Point(334, 9);
+            this.rb_men.Name = "rb_men";
+            this.rb_men.Size = new System.Drawing.Size(71, 17);
+            this.rb_men.TabIndex = 14;
+            this.rb_men.TabStop = true;
+            this.rb_men.Text = "Мужской";
+            this.rb_men.UseVisualStyleBackColor = true;
+            // 
+            // rb_women
+            // 
+            this.rb_women.AutoSize = true;
+            this.rb_women.Location = new System.Drawing.Point(334, 25);
+            this.rb_women.Name = "rb_women";
+            this.rb_women.Size = new System.Drawing.Size(72, 17);
+            this.rb_women.TabIndex = 15;
+            this.rb_women.TabStop = true;
+            this.rb_women.Text = "Женский";
+            this.rb_women.UseVisualStyleBackColor = true;
+            // 
+            // webControl1
+            // 
+            this.webControl1.Location = new System.Drawing.Point(320, 62);
+            this.webControl1.Size = new System.Drawing.Size(418, 448);
+            this.webControl1.Source = new System.Uri("about:blank", System.UriKind.Absolute);
+            this.webControl1.TabIndex = 16;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(750, 522);
+            this.Controls.Add(this.webControl1);
+            this.Controls.Add(this.rb_women);
+            this.Controls.Add(this.rb_men);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.webBrowser1);
             this.Controls.Add(this.tB_surnames);
             this.Controls.Add(this.tB_names);
             this.Controls.Add(this.label3);
@@ -190,9 +216,11 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox tB_names;
         private System.Windows.Forms.TextBox tB_surnames;
-        private System.Windows.Forms.WebBrowser webBrowser1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.RadioButton rb_men;
+        private System.Windows.Forms.RadioButton rb_women;
+        private Awesomium.Windows.Forms.WebControl webControl1;
     }
 }
 
