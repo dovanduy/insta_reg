@@ -117,4 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="textBox1.Text" xml:space="preserve">
+    <value>aleksej-kulagin91@mail.ru;v5ovmyuqlt;Алексей;Кулагин;7;10;1991;2;https://auth.mail.ru/cgi-bin/auth?fromreg=touch&amp;agent=AG_ROflNytiCnzmPoT1pAv9H&amp;Login=aleksej-kulagin91%40mail.ru&amp;Page=https%3A%2F%2Ftouch.mail.ru%2Fmessages%2Finbox
+</value>
+  </data>
 </root>

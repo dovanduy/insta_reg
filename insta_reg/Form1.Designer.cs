@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.btn_StartRegMail = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.nUD_CountMail = new System.Windows.Forms.NumericUpDown();
@@ -43,6 +44,9 @@
             this.rb_men = new System.Windows.Forms.RadioButton();
             this.rb_women = new System.Windows.Forms.RadioButton();
             this.webControl1 = new Awesomium.Windows.Forms.WebControl(this.components);
+            this.button4 = new System.Windows.Forms.Button();
+            this.webMail = new Awesomium.Windows.Forms.WebControl(this.components);
+            this.textBox1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.nUD_CountMail)).BeginInit();
             this.SuspendLayout();
             // 
@@ -79,11 +83,11 @@
             // 
             // tB_Log
             // 
-            this.tB_Log.Location = new System.Drawing.Point(12, 163);
+            this.tB_Log.Location = new System.Drawing.Point(12, 184);
             this.tB_Log.Multiline = true;
             this.tB_Log.Name = "tB_Log";
             this.tB_Log.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tB_Log.Size = new System.Drawing.Size(302, 347);
+            this.tB_Log.Size = new System.Drawing.Size(302, 326);
             this.tB_Log.TabIndex = 3;
             // 
             // button1
@@ -130,7 +134,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(12, 134);
+            this.button2.Location = new System.Drawing.Point(11, 155);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 10;
@@ -140,7 +144,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(93, 134);
+            this.button3.Location = new System.Drawing.Point(92, 155);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 11;
@@ -172,16 +176,43 @@
             // 
             // webControl1
             // 
-            this.webControl1.Location = new System.Drawing.Point(320, 62);
-            this.webControl1.Size = new System.Drawing.Size(418, 448);
+            this.webControl1.Location = new System.Drawing.Point(320, 45);
+            this.webControl1.Size = new System.Drawing.Size(329, 465);
             this.webControl1.Source = new System.Uri("about:blank", System.UriKind.Absolute);
             this.webControl1.TabIndex = 16;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(192, 155);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.TabIndex = 17;
+            this.button4.Text = "сохранить";
+            this.button4.UseVisualStyleBackColor = true;
+//            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // webMail
+            // 
+            this.webMail.Location = new System.Drawing.Point(663, 45);
+            this.webMail.Size = new System.Drawing.Size(325, 465);
+            this.webMail.TabIndex = 18;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(11, 127);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(303, 20);
+            this.textBox1.TabIndex = 19;
+            this.textBox1.Text = resources.GetString("textBox1.Text");
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(750, 522);
+            this.ClientSize = new System.Drawing.Size(1213, 523);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.webMail);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.webControl1);
             this.Controls.Add(this.rb_women);
             this.Controls.Add(this.rb_men);
@@ -221,6 +252,9 @@
         private System.Windows.Forms.RadioButton rb_men;
         private System.Windows.Forms.RadioButton rb_women;
         private Awesomium.Windows.Forms.WebControl webControl1;
+        private System.Windows.Forms.Button button4;
+        private Awesomium.Windows.Forms.WebControl webMail;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 

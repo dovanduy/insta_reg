@@ -161,9 +161,10 @@ namespace insta_reg
                         else
                         {
                             string email2 = parsed["email"];
+                            string link = parsed["body"];
                             //ToLog(email2 + ";" + pass + ";" + name + " " + surname);
                             //ToLog("Все ОК");
-                            return email2 + ";" + pass + ";" + name + ";" + surname + ";" + day + ";" + month +";" + year + ";" + sex;
+                            return email2 + ";" + pass + ";" + name + ";" + surname + ";" + day + ";" + month +";" + year + ";" + sex + ";" + link;
                             //url = body;
                             // Заходим на страницу и проверяем успешность
                         }

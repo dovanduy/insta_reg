@@ -96,3 +96,6 @@ C:\Users\Екатерина\Desktop\insta_reg\insta_reg\insta_reg\obj\Debug\inst
 C:\Users\Екатерина\Desktop\insta_reg\insta_reg\insta_reg\obj\Debug\insta_reg.Form1.resources
 C:\Users\Екатерина\Desktop\insta_reg\insta_reg\insta_reg\obj\Debug\insta_reg.Properties.Resources.resources
 C:\Users\Екатерина\Desktop\insta_reg\insta_reg\insta_reg\obj\Debug\insta_reg.csproj.GenerateResource.Cache
+C:\Users\Антон\Documents\Proj\insta_reg\insta_reg\bin\Debug\HtmlAgilityPack.dll
+C:\Users\Антон\Documents\Proj\insta_reg\insta_reg\bin\Debug\HtmlAgilityPack.pdb
+C:\Users\Антон\Documents\Proj\insta_reg\insta_reg\bin\Debug\HtmlAgilityPack.xml
